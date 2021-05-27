@@ -14,7 +14,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
 
+import com.crm.comcast.genericutility.BaseClass;
 import com.crm.comcast.genericutility.ExcelUtility;
 import com.crm.comcast.genericutility.PropertyFileUtility;
 import com.crm.comcast.genericutility.WebDriverUtility;
@@ -24,21 +26,10 @@ import com.crm.comcast.genericutility.WebDriverUtility;
  * @author Deepak
  *
  */
-public class CreatePurcahseOrderTest {
+public class CreatePurcahseOrderTest extends BaseClass{
 	
-	public static void main(String[] args) throws Throwable {
-		/* crate Object for Utility*/
-		 PropertyFileUtility pLib = new PropertyFileUtility();
-		 ExcelUtility eLib = new ExcelUtility();
-		 WebDriverUtility wLib = new WebDriverUtility();
-
-		
-		/*read common data*/
-		
-		 String BROWSER = pLib.readDataFromPropertyFfile("browser");
-		 String USERNAME = pLib.readDataFromPropertyFfile("username");
-		 String PASSWORD = pLib.readDataFromPropertyFfile("password");
-		 String URL = pLib.readDataFromPropertyFfile("url");
+	@Test(groups = "smokeTest")
+	public void createPurchaseOrderTest() throws Throwable {
 
 		
 		/*read test script data*/
@@ -50,21 +41,6 @@ public class CreatePurcahseOrderTest {
 		 String productName = eLib.getExcelData("po", 1, 7);
 		 String qty = eLib.getExcelData("po", 1, 8);
 
-		 
-		/*step 1 : login to app*/
-		 WebDriver driver = null;
-		   if(BROWSER.equalsIgnoreCase("firefox")) {
-		       driver = new FirefoxDriver();
-	      }else if(BROWSER.equalsIgnoreCase("chrome")) {
-	    	   driver = new ChromeDriver();
-	      }else if(BROWSER.equalsIgnoreCase("ie")) {
-	    	   driver = new InternetExplorerDriver();
-	      }
-		   wLib.waitforPageToLoad(driver);
- 	      driver.get(URL);
-		  driver.findElement(By.name("user_name")).sendKeys(USERNAME);
-		  driver.findElement(By.name("user_password")).sendKeys(PASSWORD);
-		  driver.findElement(By.id("submitButton")).click();
 	        
 		 
 		/*step 2 : navigate to purchase Oder Page*/ 
@@ -114,14 +90,7 @@ public class CreatePurcahseOrderTest {
 			  System.out.println(subject + "==>purchase order not created ==>Fail");
 
 		  }
-		/*step 6: logout*/
 		
-		  WebElement adminWb = driver.findElement(By.xpath("//img[@src='themes/softed/images/user.PNG']"));
-		  
-		  wLib.mouseOver(driver, adminWb);
-		  driver.findElement(By.linkText("Sign Out")).click();
-		  
-		  
 		 
 	}
 

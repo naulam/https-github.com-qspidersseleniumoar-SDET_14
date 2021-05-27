@@ -10,50 +10,24 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
 
+import com.crm.comcast.genericutility.BaseClass;
 import com.crm.comcast.genericutility.ExcelUtility;
 import com.crm.comcast.genericutility.JavaUtility;
 import com.crm.comcast.genericutility.PropertyFileUtility;
 import com.crm.comcast.genericutility.WebDriverUtility;
 
-public class CreateORganizationWithIndustries {
-
-	public static void main(String[] args) throws Throwable {
-		/*create object to Utility*/
-		 PropertyFileUtility pLib = new PropertyFileUtility();
-		 ExcelUtility eLib = new ExcelUtility();
-		 WebDriverUtility wLib = new WebDriverUtility();
-		
-		
-		/*read common data*/
-
-		 String BROWSER = pLib.readDataFromPropertyFfile("browser");
-		 String USERNAME = pLib.readDataFromPropertyFfile("username");
-		 String PASSWORD = pLib.readDataFromPropertyFfile("password");
-		 String URL = pLib.readDataFromPropertyFfile("url");
-
-		
+public class CreateORganizationWithIndustries extends BaseClass{
+	
+    @Test(groups = "regressionTest")
+    public void createOrhWithIndustried() throws Throwable {		
 		/*read test script data*/
 
 		 String orgName = eLib.getExcelData("org", 4, 2) + JavaUtility.getRanDomNum();
 		 String industry = eLib.getExcelData("org", 4, 3); 
 		 
-		 /*step 1 : login to app*/
-		 WebDriver driver = null;
-		   if(BROWSER.equalsIgnoreCase("firefox")) {
-		       driver = new FirefoxDriver();
-	      }else if(BROWSER.equalsIgnoreCase("chrome")) {
-	    	   driver = new ChromeDriver();
-	      }else if(BROWSER.equalsIgnoreCase("ie")) {
-	    	   driver = new InternetExplorerDriver();
-	      }
-		  wLib.waitforPageToLoad(driver);
- 	      driver.get(URL);
-		  driver.findElement(By.name("user_name")).sendKeys(USERNAME);
-		  driver.findElement(By.name("user_password")).sendKeys(PASSWORD);
-		  driver.findElement(By.id("submitButton")).click();
-	        
-		 
+		
 		/*step 2 : navigate to Orgnization Page*/ 
 		   driver.findElement(By.linkText("Organizations")).click();
 		  
@@ -82,11 +56,7 @@ public class CreateORganizationWithIndustries {
 				  System.out.println(orgName + "==>Orgnization not created with industry==>Fail");
 
 			  }
-				/*step 6: logout*/
-			  WebElement adminWb = driver.findElement(By.xpath("//img[@src='themes/softed/images/user.PNG']"));
-			  
-			  wLib.mouseOver(driver, adminWb);
-			  driver.findElement(By.linkText("Sign Out")).click();
+
 			  
 
 	}
