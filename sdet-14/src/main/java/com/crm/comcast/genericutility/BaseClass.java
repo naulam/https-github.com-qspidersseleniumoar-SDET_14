@@ -15,6 +15,8 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 /**
  * @author Deepak
  */
@@ -25,6 +27,7 @@ public class BaseClass {
 	public ExcelUtility eLib = new ExcelUtility();
 	public DatabaseUtility dLib = new DatabaseUtility();
 	public WebDriver driver;
+	public static WebDriver staticDriver;
 
 
 	 @BeforeSuite(groups = {"smokeTest" , "regressionTest"})
@@ -33,6 +36,7 @@ public class BaseClass {
 	  //dLib.connectToDB();
 	 }
 
+	 //@Parameters("browser")
 	 @BeforeClass(groups = {"smokeTest" , "regressionTest"})
 	 public void launchBrowser() throws Throwable {
 	  String BROWSER = pLib.readDataFromPropertyFfile("browser");
@@ -44,6 +48,7 @@ public class BaseClass {
 	  } else if (BROWSER.equalsIgnoreCase("ie")) {
 	   driver = new InternetExplorerDriver();
 	  }
+	  staticDriver=driver;
 	 }
 
 	 @BeforeMethod(groups = {"smokeTest" , "regressionTest"})
