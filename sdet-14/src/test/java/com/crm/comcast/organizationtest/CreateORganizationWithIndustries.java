@@ -10,6 +10,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.crm.comcast.genericutility.BaseClass;
@@ -18,6 +19,7 @@ import com.crm.comcast.genericutility.JavaUtility;
 import com.crm.comcast.genericutility.PropertyFileUtility;
 import com.crm.comcast.genericutility.WebDriverUtility;
 
+@Listeners(com.crm.comcast.genericutility.ListnersIMP.class)
 public class CreateORganizationWithIndustries extends BaseClass{
 	
     @Test(groups = "regressionTest")

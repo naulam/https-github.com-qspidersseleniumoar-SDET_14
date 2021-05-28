@@ -14,6 +14,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.crm.comcast.genericutility.BaseClass;
@@ -26,6 +27,7 @@ import com.crm.comcast.genericutility.WebDriverUtility;
  * @author Deepak
  *
  */
+@Listeners(com.crm.comcast.genericutility.ListnersIMP.class)
 public class CreatePurcahseOrderTest extends BaseClass{
 	
 	@Test(groups = "smokeTest")
