@@ -1,12 +1,16 @@
 package com.crm.comcast.organizationtest;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.crm.comcast.genericutility.BaseClass;
 import com.crm.comcast.genericutility.JavaUtility;
+import com.crm.comcast.objectrepository.CreateNewOrganizationPage;
+import com.crm.comcast.objectrepository.HomePage;
+import com.crm.comcast.objectrepository.OrganizationInfoPage;
+import com.crm.comcast.objectrepository.OrganizationsPage;
 
 @Listeners(com.crm.comcast.genericutility.ListnersIMP.class)
 public class CreateORganizationTest extends BaseClass{
@@ -17,19 +21,25 @@ public class CreateORganizationTest extends BaseClass{
 		/*read test script data*/
 		int ranDomNum =  JavaUtility.getRanDomNum();
 		 String orgName = eLib.getExcelData("org", 1, 2) + ranDomNum;
-		 
-
-	
-		 
+		 	 
 		/*step 2 : navigate to Orgnization Page*/ 
-		   driver.findElement(By.linkText("Organizations")).click();
-		  
+		   //driver.findElement(By.linkText("Organizations")).click();
+		 
+		 HomePage hp = new HomePage(driver);
+		 hp.navigateOrg();
+		 
 		/*step 3 : navigate to create Orgnization Page*/ 
-		   driver.findElement(By.xpath("//img[@alt='Create Organization...']")).click();
+		   //driver.findElement(By.xpath("//img[@alt='Create Organization...']")).click();
+		 
+		 OrganizationsPage org = new OrganizationsPage(driver);
+		 org.createOrg();
 		   
 		/*step 4 : create new Orgnization*/
-		   driver.findElement(By.name("accountname")).sendKeys(orgName);
-		   driver.findElement(By.xpath("//input[@title='Save [Alt+S]']")).click();
+		   //driver.findElement(By.name("accountname")).sendKeys(orgName);
+		   //driver.findElement(By.xpath("//input[@title='Save [Alt+S]']")).click();
+		 
+		 CreateNewOrganizationPage cno = new CreateNewOrganizationPage(driver);
+		 cno.createOrganization(orgName);
 		   
 		/*step 5 : create new Verify*/  
 		   String actSuccessFullMsg = driver.findElement(By.xpath("//span[@class='dvHeaderText']")).getText();
@@ -51,30 +61,24 @@ public class CreateORganizationTest extends BaseClass{
 		/*read test script data*/
 		int ranDomNum =  JavaUtility.getRanDomNum();
 		 String orgName = eLib.getExcelData("org", 7, 2) + ranDomNum;
-		 String orgType = eLib.getExcelData("org", 7, 3);
+		 //String orgType = eLib.getExcelData("org", 7, 3);
 
 	
 		 
-		/*step 2 : navigate to Orgnization Page*/ 
-		   driver.findElement(By.linkText("Organizations")).click();
+		/*step 2 : navigate to Organization Page*/ 
+		  OrganizationsPage org = new OrganizationsPage(driver);
+		  org.createOrg();
 		  
-		/*step 3 : navigate to create Orgnization Page*/ 
-		   driver.findElement(By.xpath("//img[@alt='Create Organization...']")).click();
+		/*step 3 : navigate to create Organization Page*/ 
+		   CreateNewOrganizationPage cno = new CreateNewOrganizationPage(driver);
+		   cno.createOrganization(orgName);
 		   
-		/*step 4 : create new Orgnization*/
-		   driver.findElement(By.name("accountname")).sendKeys(orgName);
-		   WebElement wb = driver.findElement(By.name("accounttype"));
-		   wLib.select(wb,orgType);
-		   driver.findElement(By.xpath("//input[@title='Save [Alt+S]']")).click();
+		/*step 5 : create new Verify*/ 
+		   OrganizationInfoPage oif = new OrganizationInfoPage(driver);
+		   String actSuccessFullMsg = oif.getSuccessfulMsg().getText();
 		   
-		/*step 5 : create new Verify*/  
-		   String actSuccessFullMsg = driver.findElement(By.xpath("//span[@class='dvHeaderText']")).getText();
-			  if(actSuccessFullMsg.contains(orgName)) {
-				  System.out.println(orgName + "==>Orgnization created successfully==>PASS");
-			  }else {
-				  System.out.println(orgName + "==>Orgnization not created ==>Fail");
-
-			  }
+		   Assert.assertTrue(actSuccessFullMsg.contains(orgName));
+		   
 
 	}
 
