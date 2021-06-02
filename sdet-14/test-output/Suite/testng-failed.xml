@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="2" guice-stage="DEVELOPMENT" name="Failed suite [Suite]" parallel="tests">
+  <test thread-count="2" name="TestRunner_Chrome(failed)" parallel="tests">
+    <parameter name="browser" value="firefox"/>
+    <classes>
+      <class name="com.crm.comcast.organizationtest.CreateORganizationWithIndustries">
+        <methods>
+          <include name="launchBrowser"/>
+          <include name="makeDBConnection"/>
+          <include name="closeBrowser"/>
+          <include name="loginToApplication"/>
+          <include name="createOrhWithIndustried"/>
+          <include name="logoutOfApplication"/>
+          <include name="closeDBConnection"/>
+        </methods>
+      </class> <!-- com.crm.comcast.organizationtest.CreateORganizationWithIndustries -->
+      <class name="com.crm.comcast.purchaseordertest.CreatePurcahseOrderTest">
+        <methods>
+          <include name="launchBrowser"/>
+          <include name="makeDBConnection"/>
+          <include name="closeBrowser"/>
+          <include name="loginToApplication"/>
+          <include name="createPurchaseOrderTest"/>
+          <include name="logoutOfApplication"/>
+          <include name="closeDBConnection"/>
+        </methods>
+      </class> <!-- com.crm.comcast.purchaseordertest.CreatePurcahseOrderTest -->
+    </classes>
+  </test> <!-- TestRunner_Chrome(failed) -->
+  <test thread-count="2" name="TestRunner_Firefox(failed)" parallel="tests">
+    <parameter name="browser" value="chrome"/>
+    <classes>
+      <class name="com.crm.comcast.purchaseordertest.CreatePurcahseOrderTest">
+        <methods>
+          <include name="launchBrowser"/>
+          <include name="makeDBConnection"/>
+          <include name="closeBrowser"/>
+          <include name="loginToApplication"/>
+          <include name="createPurchaseOrderTest"/>
+          <include name="logoutOfApplication"/>
+          <include name="closeDBConnection"/>
+        </methods>
+      </class> <!-- com.crm.comcast.purchaseordertest.CreatePurcahseOrderTest -->
+    </classes>
+  </test> <!-- TestRunner_Firefox(failed) -->
+</suite> <!-- Failed suite [Suite] -->
