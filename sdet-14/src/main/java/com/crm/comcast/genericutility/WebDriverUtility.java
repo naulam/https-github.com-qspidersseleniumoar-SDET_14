@@ -172,11 +172,13 @@ public class WebDriverUtility {
 		     * @param screenshotName
 		     * @throws Throwable
 		     */
-		    public void takeScreenshot(WebDriver driver, String screenshotName) throws Throwable {
+		    public String takeScreenshot(WebDriver driver, String screenshotName) throws Throwable {
 		    	TakesScreenshot ts=(TakesScreenshot)driver;
 		    	File src=ts.getScreenshotAs(OutputType.FILE);
-		    	File dest=new File("./screenshot/"+screenshotName+".PNG");
+		    	String screenshotPath="./screenshot/"+screenshotName+".PNG";
+		    	File dest=new File(screenshotPath);
 		    	Files.copy(src, dest);
+				return screenshotPath;
 		    }
 		    
 		    /**

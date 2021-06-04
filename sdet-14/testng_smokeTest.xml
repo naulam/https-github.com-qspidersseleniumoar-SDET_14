@@ -11,6 +11,7 @@
       <class name="com.crm.comcast.organizationtest.CreateORganizationWithIndustries"/>
       <class name="com.crm.comcast.purchaseordertest.CreatePurcahseOrderTest"/>
       <class name="com.crm.comcast.organizationtest.CreateORganizationTest"/>
+      <class name="com.crm.comcast.product.SkipTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
